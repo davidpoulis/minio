@@ -2,13 +2,13 @@ from flask import Flask, render_template, request, redirect, url_for
 from minio import Minio
 from minio.error import S3Error
 import random
-
+import os
 def upload_to_minio(s3_bucket_name, s3_object_name, object_name):
  try:
     client = Minio(
-        "172.17.0.2:9000",
-        access_key="Q3AM3UQ867SPQQA43P2F",
-        secret_key="zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG",
+        "http://minio-api:9001",
+        os.environ['ACCESS_KEY'],
+        os.environ['SECRET_KEY'],
         secure=False,
     )
     found = client.bucket_exists("asiatrip")
